@@ -97,7 +97,7 @@ struct shapegroup {
 typedef struct shapegroup shapegroup;
 
 static shapegroup *shapegroups;
-static num_shapegroups=0;
+static unsigned int num_shapegroups=0;
 
 
 static void alloc_arrays() {
@@ -615,7 +615,7 @@ static intersect_point *intersect_points=NULL;
 static int MAX_INTERSECTPOINTS=0;
 #define INTERSECTPOINT_INC 100
 
-static realloc_intersects(int minimum) {
+static void realloc_intersects(int minimum) {
   while (minimum>=MAX_INTERSECTPOINTS) {
     MAX_INTERSECTPOINTS+=INTERSECTPOINT_INC;
     intersect_points=realloc(intersect_points, sizeof(intersect_points[0])*MAX_INTERSECTPOINTS);

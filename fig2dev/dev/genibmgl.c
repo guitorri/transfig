@@ -50,7 +50,7 @@
 #include "fig2dev.h"
 #include "object.h"
 
-static set_style();
+static void set_style();
 
 #define		FONTS 			35
 #define		COLORS 			8
@@ -458,7 +458,7 @@ F_compound	*objects;
 	    fprintf(tfp, "VS%.2f;\n", pen_speed);
 }
 
-static arc_tangent(x1, y1, x2, y2, direction, x, y)
+static void arc_tangent(x1, y1, x2, y2, direction, x, y)
 double	x1, y1, x2, y2, *x, *y;
 int	direction;
 {
@@ -474,7 +474,7 @@ int	direction;
 
 /*	draw arrow heading from (x1, y1) to (x2, y2)	*/
 
-static draw_arrow_head(x1, y1, x2, y2, arrowht, arrowwid)
+static void draw_arrow_head(x1, y1, x2, y2, arrowht, arrowwid)
 double	x1, y1, x2, y2, arrowht, arrowwid;
 {
 	double	x, y, xb, yb, dx, dy, l, sina, cosa;
@@ -512,7 +512,7 @@ double	x1, y1, x2, y2, arrowht, arrowwid;
 /* 
  * set_style - issue line style commands as appropriate
  */
-static set_style(style, length)
+static void set_style(style, length)
 int	style;
 double	length;
 {
@@ -567,7 +567,7 @@ double	length;
  * set_width - issue line width commands as appropriate
  *		NOTE: HPGL/2 command used
  */
-static set_width(w)
+static void set_width(w)
     int	w;
 {
     static int current_width=-1;
@@ -585,7 +585,7 @@ static set_width(w)
 /* 
  * set_color - issue line color commands as appropriate
  */
-static set_color(color)
+static void set_color(color)
     int	color;
 {
     static	int	number		 = 0;	/* 1 <= number <= 8		*/
@@ -604,7 +604,7 @@ static set_color(color)
 	    }
 }
 
-static fill_polygon(pattern, color)
+static void fill_polygon(pattern, color)
     int	pattern;
     int	color;
 {
@@ -662,7 +662,7 @@ void genibmgl_arc(a)
     F_arc	*a;
 {
 	if (a->thickness != 0 ||
-		ibmgec && 0 <= a->fill_style && a->fill_style < patterns) {
+	    (ibmgec && 0 <= a->fill_style && a->fill_style < patterns)) {
 	    double	x, y;
 	    double	cx, cy, sx, sy, ex, ey;
 	    double	dx1, dy1, dx2, dy2, theta;
@@ -720,7 +720,7 @@ void genibmgl_ellipse(e)
     F_ellipse	*e;
 {
 	if (e->thickness != 0 ||
-		ibmgec && 0 <= e->fill_style && e->fill_style < patterns) {
+	    (ibmgec && 0 <= e->fill_style && e->fill_style < patterns)) {
 	    int		j;
 	    double	alpha;
 	    double	angle;
@@ -774,7 +774,7 @@ void genibmgl_line(l)
     F_line	*l;
 {
 	if (l->thickness != 0 ||
-		ibmgec && 0 <= l->fill_style && l->fill_style < patterns) {
+	    (ibmgec && 0 <= l->fill_style && l->fill_style < patterns)) {
 	    F_point	*p, *q;
 
 	    set_style(l->style, l->style_val);
@@ -876,7 +876,7 @@ void genibmgl_line(l)
 
 #define		THRESHOLD	.05	/* inch */
 
-static bezier_spline(a0, b0, a1, b1, a2, b2, a3, b3)
+static void bezier_spline(a0, b0, a1, b1, a2, b2, a3, b3)
     double	a0, b0, a1, b1, a2, b2, a3, b3;
 {
 	double	x0, y0, x3, y3;
@@ -932,7 +932,7 @@ F_spline	*s;
 		    s->for_arrow->ht/ppi, s->for_arrow->wid/ppi);
 	}
 
-static quadratic_spline(a1, b1, a2, b2, a3, b3, a4, b4)
+static void quadratic_spline(a1, b1, a2, b2, a3, b3, a4, b4)
 double	a1, b1, a2, b2, a3, b3, a4, b4;
 {
 	double	x1, y1, x4, y4;
@@ -1045,8 +1045,6 @@ F_text	*t;
 {
 static	int	font	 = DEFAULT;	/* font				*/
 static	int	size	 = DEFAULT;	/* font size	    in points	*/
-static	int	cs	 = 0;		/* standard  character set	*/
-static	int	ca	 = 0;		/* alternate character set	*/
 static	double	theta	 = 0.0;		/* character slant  in degrees	*/
 static	double	angle	 = 0.0;		/* label direction  in radians	*/
 	double	width;			/* character width  in centimeters */

@@ -109,6 +109,8 @@ static        double        wide[]                 = {.6,.6,.6,.6,.6,.6,.6,.6,.6
 static        double        high[]                 = {.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,
             .8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8,.8};
 
+extern void arc_tangent(double, double, double, double, int, double*, double*);
+
 static void gendxf_option(opt, optarg)
 char opt, *optarg;
 {
@@ -579,7 +581,7 @@ void gendxf_arc(a)
   fprintf(tfp, "999\n !! found gendxf_arc\n");
   if (1 == 0) {
         if (a->thickness != 0 ||
-                ibmgec && 0 <= a->fill_style && a->fill_style < patterns) {
+	    (ibmgec && 0 <= a->fill_style && a->fill_style < patterns)) {
             double        x, y;
             double        cx, cy, sx, sy, ex, ey;
             double        dx1, dy1, dx2, dy2, theta;
@@ -641,7 +643,7 @@ void gendxf_ellipse(e)
   /* This is a quick fix to use polylines rather than dxf ellipses    */
   /* This might be a compatibility option also in the future.         */
   if (e->thickness != 0 ||
-            ibmgec && 0 <= e->fill_style && e->fill_style < patterns)
+      (ibmgec && 0 <= e->fill_style && e->fill_style < patterns))
   {
     int                j;
     double        alpha;
@@ -696,8 +698,8 @@ void gendxf_ellipse(e)
 void gendxf_line(l)
 F_line        *l;
 {
-  if (l->thickness != 0 || ibmgec && 0 <= l->fill_style &&
-                                        l->fill_style < patterns)
+  if (l->thickness != 0 ||
+      (ibmgec && 0 <= l->fill_style && l->fill_style < patterns))
   {
     F_point        *p, *q, *r;
 
@@ -1056,10 +1058,6 @@ F_text        *t;
 {
   static int font = DEFAULT;        /* font                                */
   static int size = DEFAULT;        /* font size        in points          */
-  static int cs   = 0;              /* standard  character set             */
-  static int ca   = 0;              /* alternate character set             */
-  static double theta = 0.0;        /* character slant  in degrees         */
-  static double angle = 0.0;        /* label direction  in radians         */
   double width;                     /* character width  in centimeters     */
   double height;                    /* character height in centimeters     */
 

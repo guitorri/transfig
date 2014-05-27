@@ -727,7 +727,7 @@ F_line *l;
 	            fprintf(tfp,";\n");
 
 		 if ((l->for_arrow != NULL) || (l->back_arrow != NULL))
-		     genmp_arrowheads(l, O_POLYLINE);
+		     genmp_arrowheads((F_line*)l, O_POLYLINE);
 	      }
 	      break;
 	   case 4:            /* arc box */
@@ -861,7 +861,7 @@ F_spline *s;
 	            fprintf(tfp,";\n");
 		 
 		 if ((s->for_arrow != NULL) || (s->back_arrow != NULL))
-		     genmp_arrowheads(s, O_SPLINE);
+		   genmp_arrowheads((F_line*)s, O_SPLINE);
 	      }
 	      break;
 	   case 2:         /* interpolated spline (open) */
@@ -900,7 +900,7 @@ F_spline *s;
 	            fprintf(tfp,";\n");
 
 		 if ((s->for_arrow != NULL) || (s->back_arrow != NULL))
-		     genmp_arrowheads(s, O_SPLINE);
+		   genmp_arrowheads((F_line*)s, O_SPLINE);
 	      }
 	      break;
 	   default:
@@ -1014,7 +1014,7 @@ F_arc *a;
 	            fprintf(tfp,";\n");
 
 		 if ((a->for_arrow != NULL) || (a->back_arrow != NULL))
-		     genmp_arrowheads(a, O_ARC);
+		     genmp_arrowheads((F_line*)a, O_ARC);
 	      }
 	      break;
 	   default:
@@ -1150,7 +1150,7 @@ F_text *t;
 	    }
 	} else {
 	    /* special text in latex mode: just write the text. */
-	    fprintf(tfp, t->cstring);
+	  fprintf(tfp, "%s", t->cstring);
 	}
 	fprintf(tfp," etex;\n");
 
@@ -1164,7 +1164,7 @@ F_text *t;
 
 	fprintf(tfp,"  picture q;\n");
 	fprintf(tfp,"  q=thelabel.urt(\"");
-        fprintf(tfp, t->cstring);
+        fprintf(tfp, "%s", t->cstring);
 	fprintf(tfp, "\" infont ");
 	if (t->font<0) {
 	    fprintf(tfp, "defaultfont");

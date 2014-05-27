@@ -139,7 +139,7 @@ gencgm_start(objects)
   
   if (from) {
 	figname = malloc(strlen(from)+1);
-	sprintf(figname, from);
+	sprintf(figname, "%s", from);
 	p = strrchr(figname, '/');
 	if (p) 
 	    figname = p+1;		/* remove path from name for comment in file */

@@ -28,10 +28,14 @@ extern int adjust_boundingbox;
 #define		max(a, b)		(((a) > (b)) ? (a) : (b))
 #define		min(a, b)		(((a) < (b)) ? (a) : (b))
 
+extern int depth_filter(int);
+extern void arc_tangent_int(double, double, double, double, int, int*, int*);
+
+int	direction;
+
 static double	compute_angle();
 static void	arrow_bound();
 static void	points_bound();
-static void	control_points_bound();
 
 /************** ARRAY FOR ARROW SHAPES **************/ 
 
@@ -663,28 +667,6 @@ points_bound(points, xmin, ymin, xmax, ymax)
 	    }
 	*xmin = sx; *ymin = sy;
 	*xmax = bx; *ymax = by;
-}
-
-static void
-control_points_bound(cps, xmin, ymin, xmax, ymax)
-    F_control	*cps;
-    int		*xmin, *ymin, *xmax, *ymax;
-{
-	F_control	*c;
-	double		bx, by, sx, sy;
-
-	bx = sx = cps->lx;
-	by = sy = cps->ly;
-	sx = min(sx, cps->rx); sy = min(sy, cps->ry);
-	bx = max(bx, cps->rx); by = max(by, cps->ry);
-	for (c = cps->next; c != NULL; c = c->next) {
-	    sx = min(sx, c->lx); sy = min(sy, c->ly);
-	    bx = max(bx, c->lx); by = max(by, c->ly);
-	    sx = min(sx, c->rx); sy = min(sy, c->ry);
-	    bx = max(bx, c->rx); by = max(by, c->ry);
-	    }
-	*xmin = round(sx); *ymin = round(sy);
-	*xmax = round(bx); *ymax = round(by);
 }
 
 /* extend xmin, ymin xmax, ymax by the arrow boundaries of obj (if any) */

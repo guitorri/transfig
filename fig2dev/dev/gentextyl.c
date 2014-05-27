@@ -44,6 +44,7 @@ static void set_style();
 static int		line_style = 0; /* Textyl solid line style */
 static int 		linethick = 2;  /* Range is 1-12 `pixels' */
  
+extern void arc_tangent(double, double, double, double, int, double*, double*);
 
 static void
 gentextyl_option(opt, optarg)

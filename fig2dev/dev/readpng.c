@@ -176,7 +176,7 @@ read_png(file,filetype,pic,llx,lly)
     png_read_image(png_ptr, row_pointers);
 
     /* allocate the bitmap */
-    if ((pic->bitmap=malloc(rowsize*h))==NULL)
+    if ((pic->bitmap=(unsigned char*)malloc(rowsize*h))==NULL)
 	    return 0;
 
     /* copy it to our bitmap */

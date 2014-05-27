@@ -136,6 +136,8 @@ static void drawarc();
 static void fdraw_arrow_head();
 static char *FillCommands();
 
+extern void arc_tangent(double, double, double, double, int, double*, double*);
+
 /* Structure for Point with "double" values */
 struct fp_struct {
     double x,y;
@@ -1312,7 +1314,7 @@ genepic_text(text)
     if (!special_text(text))
 	/* This loop escapes special LaTeX characters. */
 	for (cp = (unsigned char*)text->cstring; *cp; cp++) {
-      	    if (special_index=strchr(latex_text_specials, *cp)) {
+	  if ((special_index=strchr(latex_text_specials, *cp)) != NULL) {
 	      /* Write out the replacement.  Implementation note: we can't
 		 use puts since that will output an additional newline. */
 	      esc_cp=latex_text_mappings[special_index-latex_text_specials];

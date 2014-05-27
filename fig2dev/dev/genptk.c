@@ -113,6 +113,7 @@ genptk_start(F_compound *objects)
 	struct paperdef	*pd;
 
 	ppi = ppi / mag;
+	ht = swap = wid = 0.0;
 
 	/* print any whole-figure comments prefixed with "#" */
 	if (objects->comments) {

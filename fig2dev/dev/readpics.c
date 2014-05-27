@@ -106,7 +106,7 @@ open_picfile(name, type, pipeok, retname)
     if (*type == 1 && !pipeok) {
 	char *p;
 	system(unc);
-	if (p=strrchr(name,'.')) {
+	if ((p=strrchr(name,'.')) != NULL) {
 	    *p = '\0';		/* terminate name before last .gz, .z or .Z */
 	}
 	strcpy(retname, name);
@@ -153,7 +153,7 @@ xf_basename(filename)
     char	   *p;
     if (filename == NULL || *filename == '\0')
 	return filename;
-    if (p=strrchr(filename,'/')) {
+    if ((p=strrchr(filename,'/')) != NULL) {
 	return ++p;
     } else {
 	return filename;

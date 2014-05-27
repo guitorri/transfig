@@ -208,7 +208,8 @@ F_spline *s;
 
 	setpen(s->thickness);
 	fprintf(tfp, "  store (curpath)\n");
-	if ((s->type == 0) || (s->type == 2) && (s->fill_style < 0)) /* Open spline */
+	if ((s->type == 0) ||
+	    ((s->type == 2) && (s->fill_style < 0))) /* Open spline */
 		fprintf(tfp,"  drawn curve(false)\n");
 	else { /* Closed and/or filled spline, see comment above */
 		if (s->fill_style == BLACK_FILL)

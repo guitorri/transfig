@@ -68,7 +68,6 @@ static INLINE double f_blend();
 static INLINE double g_blend();
 static INLINE double h_blend();
 static void          free_point_array();
-static int           num_points();
 static void          too_many_points();
 static F_line	     *create_line();
 static F_point	     *create_point();
@@ -648,7 +647,7 @@ create_cpoint()
     F_control	   *cp;
 
     if ((cp = (F_control *) malloc(CONTROL_SIZE)) == NULL)
-	fprintf(stderr,Err_mem);
+	put_msg(Err_mem);
     return cp;
 }
 
@@ -659,7 +658,7 @@ create_line()
     F_line	   *l;
 
     if ((l = (F_line *) malloc(LINOBJ_SIZE)) == NULL)
-	fprintf(stderr,Err_mem);
+	put_msg(Err_mem);
     l->pic = NULL;
     l->next = NULL;
     l->for_arrow = NULL;
@@ -678,17 +677,4 @@ create_point()
     if ((p = (F_point *) malloc(POINT_SIZE)) == NULL)
 	put_msg(Err_mem);
     return p;
-}
-
-
-
-static int
-num_points(points)
-    F_point	   *points;
-{
-    int		    n;
-    F_point	   *p;
-
-    for (p = points, n = 0; p != NULL; p = p->next, n++);
-    return n;
 }

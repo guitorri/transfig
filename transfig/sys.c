@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "transfig.h"
 
 #define MAXSYS 10000
@@ -41,7 +42,7 @@ char *sysls()
   return sysbuf;
 }
 
-sysmv(file)
+void sysmv(file)
 char *file;
 {
   sprintf(sysbuf, "%s~", file);

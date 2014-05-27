@@ -72,7 +72,7 @@ void dispbyte(unsigned char *ptr,int *xp,int *yp,int c,int w,int h,
 
 void pcx_decode();
 
-_read_pcx(pcxfile,pic)
+int _read_pcx(pcxfile,pic)
     FILE	*pcxfile;
     F_pic	*pic;
 {

@@ -158,6 +158,11 @@ makefile(mk, altfonts, arg_list)
 		needpic = 1;
 		break;
 
+	  case gbx:
+  	  case dxf:
+	  case svg:
+	  default:
+	        break;
 	}
 
 	putclean(mk, i, lname[a->tolang] );

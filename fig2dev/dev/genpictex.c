@@ -53,6 +53,8 @@ static char		*plotsymbol = "\\makebox(0,0)[l]{\\tencirc\\symbol{'160}}";
 static int		cur_thickness = -1;
 static Boolean		anonymous = False;
 
+extern void arc_tangent(double, double, double, double, int, double*, double*);
+
 static void
 genpictex_option(opt, optarg)
 char opt, *optarg;

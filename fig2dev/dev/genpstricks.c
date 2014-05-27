@@ -622,6 +622,7 @@ void genpstrx_option(opt, optarg)
     break;
  
   case 'l':
+    tmp_dbl = -1.0;
     if (sscanf(optarg, "%lf", &tmp_dbl) == 1 && 0 <= tmp_dbl && tmp_dbl <= 2.0)
       Line_weight = tmp_dbl;
     else
@@ -629,6 +630,7 @@ void genpstrx_option(opt, optarg)
     break;
  
   case 'n':
+    tmp_int = -1;
     if (sscanf(optarg, "%d", &tmp_int) == 1 && 0 <= tmp_int && tmp_int <= 3)
       Page_mode = tmp_int;
     else
@@ -664,14 +666,19 @@ void genpstrx_option(opt, optarg)
     break;
  
   case 'R':
-    if (sscanf(optarg, "%d", &tmp_int) == 1 && 0 <= tmp_int && tmp_int <= 2)
+    tmp_int = -1;
+    if (sscanf(optarg, "%d", &tmp_int) == 1 &&
+	(0 <= tmp_int && tmp_int <= 2))
       Arrows = tmp_int;
     else
       fprintf(stderr, "warning: bad arrow spec (0, 1, or 2 expected)\n");
     break;
  
   case 'S':
-    if (optarg && sscanf(optarg, "%d", &tmp_int) == 1 && (tmp_int < 8 || tmp_int > 12)) {
+    tmp_int = 0;
+    if ((optarg != NULL) &&
+	sscanf(optarg, "%d", &tmp_int) == 1 &&
+	(tmp_int < 8 || tmp_int > 12)) {
       fprintf(stderr, "Scale must be between 8 and 12 inclusively\n");
       exit(1);
     }

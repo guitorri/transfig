@@ -29,6 +29,9 @@
 #include "patchlevel.h"
 #include "transfig.h"
 
+extern void makefile(FILE*, int, ...);
+extern void texfile(FILE*, char*, ...);
+extern void sysmv(char*);
 
 argument *parse_arg(), *arglist = NULL, *lastarg = NULL;
 char *strip();
@@ -87,7 +90,7 @@ char *iname[] = {
 	"ps",
 	"eps"};
  
-main(argc, argv)
+int main(argc, argv)
 int argc;
 char *argv[];
 {
@@ -179,7 +182,7 @@ char *argv[];
   if (!arglist)
   {
 	argbuf = sysls();
-	while (cp = strchr(argbuf, '\n'))
+	while ((cp = strchr(argbuf, '\n')) != NULL)
 	{
 		*cp = '\0';
 		a = parse_arg(tolang, arg_f, arg_s, arg_m, arg_o, argbuf);
@@ -212,6 +215,7 @@ char *argv[];
   }
   makefile(mk, altfonts, arglist);
   exit(0);
+  return(0);
 }
 
 enum language str2lang(s)

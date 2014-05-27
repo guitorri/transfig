@@ -1275,10 +1275,10 @@ static int
 removestr(char *buf, char *str, int *len)
 {
 	int	slen = strlen(str)-1;
-	int	i, found=0;
+	int	found=0;
 	char	*cp = buf;
 
-	while (cp=strstr(buf,str)) {
+	while ((cp=strstr(buf,str)) != NULL) {
 		*len = *len - slen;
 	    	memmove(cp, cp+slen, *len-(cp-buf));
 		*(buf+*len) = '\0';

@@ -373,7 +373,7 @@ grid_usage()
      fprintf(stderr,"  Ignoring grid.\n");
 }
 
-main(argc, argv)
+int main(argc, argv)
 int	 argc;
 char	*argv[];
 {
@@ -449,6 +449,7 @@ char	*argv[];
 	if ((tfp != stdout) && (tfp != 0)) 
 	    (void)fclose(tfp);
 	exit(status);
+	return(0);
 }
 
 void

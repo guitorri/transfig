@@ -33,7 +33,6 @@
 
 static void
 	drawBitmap(F_line *),
-	drawLine(F_point *, int, int, int, int, int),
 	drawShape(void (*)(), void *, int, int, int, int, int, double),
 	niceLine(char *),
 	tkArc(void *, unsigned int, unsigned int, unsigned int, int),
@@ -122,6 +121,7 @@ gentk_start(F_compound *objects)
 	sprintf(stfp, "# Produced by fig2dev Version %s Patchlevel %s\n", VERSION, PATCHLEVEL);
 	niceLine(stfp);
 	ppi = ppi / mag * 80/72.0;
+	ht = swap = wid = 0.0;
 
 	/* print any whole-figure comments prefixed with "#" */
 	if (objects->comments) {

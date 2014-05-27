@@ -173,7 +173,7 @@ get_slope(dx, dy, sxp, syp, arrow)
     if (dy < 0) *syp = -*syp;
 }
 
-latex_endpoint(x1, y1, x2, y2, xout, yout, arrow, magnet)
+void latex_endpoint(x1, y1, x2, y2, xout, yout, arrow, magnet)
     int  x1, y1, x2, y2;
     int  *xout, *yout;
     int  arrow, magnet;

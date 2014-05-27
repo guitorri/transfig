@@ -47,6 +47,7 @@ lookup_X_color(name, rgb)
     }
 
     if (name[0] == '#') {			/* hex color parse it now */
+        n = 0;
 	if (strlen(name) == 4) {		/* #rgb */
 		n = sscanf(name,"#%1x%1x%1x",&r,&g,&b);
 		rgb->red   = ((r << 4) + r) << 8;
